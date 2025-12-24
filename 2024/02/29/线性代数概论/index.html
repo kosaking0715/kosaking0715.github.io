@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>线性代数概论 - KoSaking&#039;s blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="KoSaking&#039;s blog"><meta name="msapplication-TileImage" content="/img/nene.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="KoSaking&#039;s blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="阅读前提示   本文绝大多数理论来源为山东大学数学学院主编的《线性代数》第三版教材． 出于复习需要，本文仅收录较为重要的，或容易遗忘的性质、定理与公式等． 在介绍知识点时，本文默认所有的矩阵运算均有意义． 为行文方便，若无特殊说明，性质、定理与公式等仅从行的角度叙述． 若存在错误或表达不规范之处，请通过邮箱联系加以指正．"><meta property="og:type" content="blog"><meta property="og:title" content="线性代数概论"><meta property="og:url" content="http://blog.kksk.tech/2024/02/29/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%A6%82%E8%AE%BA/"><meta property="og:site_name" content="KoSaking&#039;s blog"><meta property="og:description" content="阅读前提示   本文绝大多数理论来源为山东大学数学学院主编的《线性代数》第三版教材． 出于复习需要，本文仅收录较为重要的，或容易遗忘的性质、定理与公式等． 在介绍知识点时，本文默认所有的矩阵运算均有意义． 为行文方便，若无特殊说明，性质、定理与公式等仅从行的角度叙述． 若存在错误或表达不规范之处，请通过邮箱联系加以指正．"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://blog.kksk.tech/gallery/cover/awa_subaru-cover.png"><meta property="article:published_time" content="2024-02-29T01:13:50.000Z"><meta property="article:modified_time" content="2025-12-24T02:24:49.327Z"><meta property="article:author" content="KoSaking"><meta property="article:tag" content="math"><meta property="article:tag" content="linear algebra"><meta property="article:tag" content="matrix"><meta property="article:tag" content="vector"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://blog.kksk.tech/gallery/cover/awa_subaru-cover.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.kksk.tech/2024/02/29/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%A6%82%E8%AE%BA/"},"headline":"线性代数概论","image":["http://blog.kksk.tech/gallery/cover/awa_subaru-cover.png"],"datePublished":"2024-02-29T01:13:50.000Z","dateModified":"2025-12-24T02:24:49.327Z","author":{"@type":"Person","name":"KoSaking"},"publisher":{"@type":"Organization","name":"KoSaking's blog","logo":{"@type":"ImageObject","url":{"text":"","light":"/img/logo.svg","dark":"/img/logo-dark.svg"}}},"description":"阅读前提示   本文绝大多数理论来源为山东大学数学学院主编的《线性代数》第三版教材． 出于复习需要，本文仅收录较为重要的，或容易遗忘的性质、定理与公式等． 在介绍知识点时，本文默认所有的矩阵运算均有意义． 为行文方便，若无特殊说明，性质、定理与公式等仅从行的角度叙述． 若存在错误或表达不规范之处，请通过邮箱联系加以指正．"}</script><link rel="canonical" href="http://blog.kksk.tech/2024/02/29/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E6%A6%82%E8%AE%BA/"><link rel="icon" href="/img/nene.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="dns-prefetch" href="https://blog.kksk.tech/"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.1.1"></head><body class="is-3-column"><canvas id="universe"></canvas><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img class="logo-img" src="/img/logo.svg" alt="KoSaking&#039;s blog" height="28"><img class="logo-img-dark" src="/img/logo-dark.svg" alt="KoSaking&#039;s blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item night" id="night-nav" title="Dark Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="/gallery/cover/awa_subaru-cover.png" alt="线性代数概论"></span></div><article class="card-content article" role="article"><h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal"><i class="fas fa-angle-double-right"></i>线性代数概论</h1><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><i class="far fa-calendar-alt"> </i><time dateTime="2024-02-29T01:13:50.000Z" title="2024-02-29T01:13:50.000Z">2024-02-29</time></span><span class="level-item is-hidden-mobile"><i class="far fa-calendar-check"> </i><time dateTime="2025-12-24T02:24:49.327Z" title="2025-12-24T02:24:49.327Z">2025-12-24</time></span><span class="level-item"><i class="far fa-folder-open has-text-grey"></i> <a class="link-muted" href="/categories/math/">math</a><span> / </span><a class="link-muted" href="/categories/note/">note</a></span><span class="level-item"><i class="far fa-clock"></i> 35 minutes read (About 5216 words)</span></div></div><div class="content"><div class="admonition info">
+<div class="admonition-title">阅读前提示</div>
+<div style="margin-top: .8rem">
+<ul>
+<li>本文<b>绝大多数</b>理论来源为山东大学数学学院主编的《线性代数》第三版教材．</li>
+<li>出于复习需要，本文仅收录较为重要的，或容易遗忘的性质、定理与公式等．</li>
+<li>在介绍知识点时，本文默认<b>所有的矩阵运算均有意义</b>．</li>
+<li>为行文方便，若无特殊说明，性质、定理与公式等仅从<b>行的角度</b>叙述．</li>
+<li>若存在错误或表达不规范之处，请通过邮箱联系加以指正．</li>
+</ul>
+</div>
+</div>
+<span id="more"></span>
+<h2 id="向量与向量组">向量与向量组</h2>
+<h3 id="基本定义与运算">基本定义与运算</h3>
+<p>由 $n$ 个数 $a _1,\,a _2,\,\cdots,\,a _n$ 组成的有序数组 $\boldsymbol{\alpha}=(a _1,a _2,\cdots,a _n)$ 称为 <strong>$n$ 维向量</strong>，其中每一个数称为其<strong>分量</strong>．</p>
+<p>向量分为<strong>行向量</strong>与<strong>列向量</strong>两类．</p>
+<p>向量的加法、数乘和与 $0$ 的运算等与直观感知一致，在此不再赘述．</p>
+<h3 id="向量间的线性表示">向量间的线性表示</h3>
+<p>设 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n,\,\boldsymbol{\beta}$ 均为 $m$ 维向量，记向量组 $\boldsymbol{A}:\,\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$，若存在一组数 $k _1,\,k _2,\,\cdots,\,k _n$，使得</p>
+<p>$$
+\boldsymbol{\beta}=k _1\boldsymbol{\alpha} _1+k _2\boldsymbol{\alpha} _2+\cdots+k _n\boldsymbol{\alpha} _n
+$$</p>
+<p>成立，则称 $\boldsymbol{\beta}$ 可由向量组 $\boldsymbol{A}$ <strong>线性表示</strong>，或称 $\boldsymbol{\beta}$ 是向量组 $\boldsymbol{A}$ 的<strong>线性组合</strong>．</p>
+<div class="admonition error"><p class="admonition-title">注意事项
+</p><p>线性表示的定义<strong>允许</strong>出现 $k _1=k _2=\cdots=k _n=0$ 的情况．</p>
+</div>
+<p>线性表示的性质如下所示．</p>
+<ol>
+<li>
+<p>零向量可由任意一个向量组线性表示．</p>
+</li>
+<li>
+<p>向量组中的任意一个向量均可由该向量组线性表示．</p>
+</li>
+<li>
+<p>任意一个 $n$ 维向量均可由向量组
+$$
+\boldsymbol{e} _1=(1,0,\cdots,0),\,\boldsymbol{e} _2=(0,1,\cdots,0),\,\boldsymbol{e} _n=(0,0,\cdots,1)
+$$</p>
+<p>线性表示．</p>
+</li>
+</ol>
+<h3 id="向量组的线性相关性">向量组的线性相关性</h3>
+<p>设有 $n$ 个 $m$ 维向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n$，若存在一组<strong>不全为</strong> $0$ 的数 $k _1,\,k _2,\,\cdots,\,k _n$，使得</p>
+<p>$$
+k _1\boldsymbol{\alpha} _1+k _2\boldsymbol{\alpha} _2+\cdots+k _n\boldsymbol{\alpha} _n=\boldsymbol{0}
+$$</p>
+<p>成立，则称向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n$ 是<strong>线性相关</strong>的，否则称为是<strong>线性无关</strong>的．</p>
+<p>线性相关的性质如下所示．</p>
+<ol>
+<li>
+<p>若向量组中存在两个向量的对应分量成比例，则该向量组是线性相关的．</p>
+</li>
+<li>
+<p><strong>只含有一个零向量</strong>的向量组是线性相关的，即 $k\boldsymbol{0}\equiv\boldsymbol{0}$，其中 $k\neq 0$．</p>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">
+ <ul>
+ <li><b>只含有一个非零向量</b>的向量组是线性无关的，即 $k\boldsymbol{\alpha}=\boldsymbol{0},\,\boldsymbol{\alpha}\neq 0\Rightarrow k\equiv 0$．</li>
+ <li><b>只含有一个向量</b>的向量组 $\{\,\boldsymbol{\alpha}\,\}$ 线性相关的<b>充要条件</b>为 $\boldsymbol{\alpha}=\boldsymbol{0}$．</li>
+ </ul>
+ </div>
+ </div>
+</li>
+<li>
+<p>含有零向量的向量组必定线性相关．</p>
+</li>
+<li>
+<p>若向量组中<strong>部分向量线性相关</strong>，则该向量组是线性相关的．</p>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">
+ <ul>
+ <li>若向量组是线性相关的，则新增任意个向量后，所得到的向量组仍是线性相关的．</li>
+ <li>若向量组是线性无关的，则其<b>所有子向量组</b>均是线性无关的．</li>
+ </ul>
+ </div>
+ </div>
+</li>
+<li>
+<p>若向量组是线性无关的，则将其中<strong>每个向量升维</strong>后所得到的向量组仍是线性无关的．</p>
+ <div class="admonition error">
+ <div class="admonition-title">注意事项</div>
+ <div style="margin-top: .8rem">每个向量的升维分量<b>可以互不相等</b>．</div>
+ </div>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">若向量组是线性相关的，则将其中<b>每个向量降维</b>后所得到的向量组仍是线性相关的．</div>
+ </div>
+</li>
+<li>
+<p>$n$ 个 $n$ 维向量<strong>线性无关</strong>的<strong>充要条件</strong>为其组成的行列式的值 $D\neq 0$．</p>
+ <div class="admonition info">
+ <div class="admonition-title">提示</div>
+ <div style="margin-top: .8rem">本质是克莱姆法则的应用．</div>
+ </div>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">
+ <ul>
+ <li>$n$ 个 $n$ 维向量<b>线性相关</b>的<b>充要条件</b>为其组成的行列式的值 $D=0$．</li>
+ <li>含有 $n$ 个单位向量的向量组 $\{\,\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\boldsymbol{\varepsilon} _n\,\}$ 是线性无关的．</li>
+ </ul>
+ </div>
+ </div>
+</li>
+</ol>
+<div id="linear_correlation">涉及线性相关的部分定理如下所示．</div>
+<ol>
+<li>
+<p>向量组线性相关的<strong>充要条件</strong>为该向量组至少存在一个可由其余向量线性表示的向量．</p>
+</li>
+<li>
+<p>若向量组 $\boldsymbol{A}:\,\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _s\,\}$ 线性无关，而向量组 $\boldsymbol{B}:\,\boldsymbol{A}\cup\{\,\boldsymbol{\beta}\,\}$ 线性相关，则 $\boldsymbol{\beta}$ 可由 $\boldsymbol{A}$ <strong>唯一</strong>线性表示．</p>
+</li>
+<li>
+<p>若向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _s$ 线性无关，且可由向量 $\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _t$ 线性表示，则 $s\leqslant t$．</p>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">
+ <ul>
+ <li>若 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _s$ 可由 $\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _t$ 线性表示，且 $s>t$，则 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _s$ 线性相关．</li>
+ <li>若 $n>m$，则 $n$ 个 $m$ 维向量线性相关．（此推论将在“<a href="#homogeneous_linear_equations">齐次线性方程组的解情况</a>”一节中进行解释）</li>
+ <li>两个<b>等价</b>的、<b>线性无关</b>的向量组所含向量个数相同．</li>
+ </ul>
+ </div>
+ </div>
+</li>
+</ol>
+<h3 id="向量组的等价关系">向量组的等价关系</h3>
+<p>设有两个<strong>同维</strong>的向量组 $\boldsymbol{A}:\,\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _m\,\}$ 和 $\boldsymbol{B}:\,\{\,\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _n\,\}$，若</p>
+<ol>
+<li>向量组 $\boldsymbol{A}$ 中的每一个向量 $\boldsymbol{\alpha} _i$ 均可由向量组 $\boldsymbol{B}$ 线性表示；</li>
+<li>向量组 $\boldsymbol{B}$ 中的每一个向量 $\boldsymbol{\beta} _i$ 均可由向量组 $\boldsymbol{A}$ 线性表示．</li>
+</ol>
+<p>即向量组 $\boldsymbol{A}$ 与 $\boldsymbol{B}$ 可以<strong>相互线性表示</strong>，则称向量组 $\boldsymbol{A}$ 与 $\boldsymbol{B}$ <strong>等价</strong>，记为 $\boldsymbol{A}\cong\boldsymbol{B}$．</p>
+<p>向量组等价的性质如下所示．</p>
+<ol>
+<li><strong>反身性</strong>：$\boldsymbol{A}\cong\boldsymbol{A}$．</li>
+<li><strong>对称性</strong>：$\boldsymbol{A}\cong\boldsymbol{B}\Rightarrow\boldsymbol{B}\cong\boldsymbol{A}$．</li>
+<li><strong>传递性</strong>：$\boldsymbol{A}\cong\boldsymbol{B},\,\boldsymbol{B}\cong\boldsymbol{C}\Rightarrow\boldsymbol{A}\cong\boldsymbol{C}$．</li>
+</ol>
+<h3 id="向量组的秩">向量组的秩</h3>
+<p>设在向量组 $\boldsymbol{A}:\,\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 中，子向量组 $\boldsymbol{A} _t:\,\{\,\boldsymbol{\alpha} _{i _1},\,\boldsymbol{\alpha} _{i _2},\,\cdots,\,\boldsymbol{\alpha} _{i _t}\,\}$ 满足：</p>
+<ol>
+<li>该子向量组线性无关；</li>
+<li>是<strong>最长</strong>的线性无关的子向量组；</li>
+<li>向量组 $\boldsymbol{A}$ 的其余向量均可由 $\boldsymbol{A} _t$ 线性表示．</li>
+</ol>
+<p>则称 $\boldsymbol{A} _t$ 为 $\boldsymbol{A}$ 的一个<strong>极大线性无关组</strong>，简称为<strong>极大无关组</strong>．</p>
+<div class="admonition error"><p class="admonition-title">注意事项
+</p><ul>
+<li>向量组的极大无关组<strong>一般不唯一</strong>．</li>
+<li>全为零向量的向量组<strong>没有</strong>极大无关组．</li>
+<li>一个<strong>线性无关</strong>的向量组的极大无关组是其本身．</li>
+<li>任意一个向量组与其极大无关组<strong>等价</strong>．</li>
+</ul>
+</div>
+<p><strong>若一个向量组拥有两个极大无关组，则二者所含向量个数相同</strong>，依据为：</p>
+<ol>
+<li>任意一个向量组与其极大无关组等价；</li>
+<li>两个等价的、线性无关的向量组所含向量个数相同．</li>
+</ol>
+<p>因此，我们称向量组 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 的极大无关组所含向量的个数为该向量组的<strong>秩</strong>，记为 $r(\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n)$．</p>
+<p>向量组的秩的性质如下所示．</p>
+<ol>
+<li>
+<p>对于 $m$ 维向量组 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$，有 $0\leqslant r(\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n)\leqslant\min(m,n)$．</p>
+ <div class="admonition info">
+ <div class="admonition-title">提示</div>
+ <div style="margin-top: .8rem">若 $n>m$，则 $n$ 个 $m$ 维向量线性相关．</div>
+ </div>
+ <div class="admonition error">
+ <div class="admonition-title">注意事项</div>
+ <div style="margin-top: .8rem">为保证极大无关组的线性无关性，必须保证向量组的向量个数小于等于向量组的维数．</div>
+ </div>
+</li>
+<li>
+<p>向量组 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 线性无关的<strong>充要条件</strong>为 $r(\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n)=n$．</p>
+</li>
+<li>
+<p>向量组 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 线性相关的<strong>充要条件</strong>为 $r(\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n)&lt;n$．</p>
+</li>
+<li>
+<p>若向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _s$ 可由向量 $\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _t$ 线性表示，则 $r(\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _s)\leqslant r(\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _t)$．</p>
+</li>
+</ol>
+<h3 id="矩阵的行秩与列秩">矩阵的行秩与列秩</h3>
+<p>矩阵 $\boldsymbol{A}=\left(\;\begin{matrix}a _{11} &amp; a _{12} &amp; \cdots &amp; a _{1n} \\ a _{21} &amp; a _{22} &amp; \cdots &amp; a _{2n} \\ \vdots &amp; \vdots &amp; &amp; \vdots \\ a _{m1} &amp; a _{m2} &amp; \cdots &amp; a _{mn}\end{matrix}\;\right)$ 可视为是由若干行向量组成的矩阵 $\left(\,\begin{matrix}\boldsymbol{\alpha} _1 \\ \boldsymbol{\alpha} _2 \\ \vdots \\ \boldsymbol{\alpha} _m\end{matrix}\,\right)$，其中</p>
+<p>$$
+\boldsymbol{\alpha} _i=(a _{i1},a _{i2},\cdots,a _{in})\qquad (\,i=1,\,2,\,\cdots,\,m\,)
+$$</p>
+<p>则称向量组 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _m\,\}$ 的秩为矩阵 $\boldsymbol{A}$ 的<strong>行秩</strong>，而<strong>列秩</strong>的定义与之同理．</p>
+<p>设矩阵 $\boldsymbol{A}$ 的秩为 $r(\boldsymbol{A})$，行秩为 $r _{\boldsymbol{\alpha}}$，列秩为 $r _{\boldsymbol{\beta}}$，则有</p>
+<p>$$
+r(\boldsymbol{A})=r _{\boldsymbol{\alpha}}=r _{\boldsymbol{\beta}}
+$$</p>
+<p>成立．</p>
+<h3 id="极大无关组的求解方法">极大无关组的求解方法</h3>
+<p>设由列向量组成的矩阵 $\boldsymbol{A}=(\,\begin{matrix}\boldsymbol{\alpha} _1 &amp; \boldsymbol{\alpha} _2 &amp; \cdots &amp; \boldsymbol{\alpha} _n\end{matrix}\,)$ 经一系列初等行变换后化为矩阵 $\boldsymbol{B}=(\,\begin{matrix}\boldsymbol{\beta} _1 &amp; \boldsymbol{\beta} _2 &amp; \cdots &amp; \boldsymbol{\beta} _n\end{matrix}\,)$，则有</p>
+<ol>
+<li>若 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 的极大无关组为 $\{\,\boldsymbol{\alpha} _{i _1},\,\boldsymbol{\alpha} _{i _2},\,\cdots,\,\boldsymbol{\alpha} _{i _t}\,\}$，则 $\{\,\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _n\,\}$ 的极大无关组为 $\{\,\boldsymbol{\beta} _{i _1},\,\boldsymbol{\beta} _{i _2},\,\cdots,\,\boldsymbol{\beta} _{i _t}\,\}$；</li>
+<li>若对于 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 的其余向量均有 $\boldsymbol{\alpha} _p=\displaystyle\sum\limits _{s=1}^{t}k _s\boldsymbol{\alpha} _{i _s}$ 成立，其中 $p\neq {i _s}$，则 $\boldsymbol{\beta} _p=\displaystyle\sum\limits _{s=1}^{t}k _s\boldsymbol{\beta} _{i _s}$．</li>
+</ol>
+<p>换而言之，<strong>初等行变换不改变矩阵列向量的线性关系</strong>，因此，求解向量组 $\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 的极大无关组的步骤为：</p>
+<ol>
+<li>将向量组<strong>按列摆放</strong>组成矩阵 $\boldsymbol{A}$；</li>
+<li>对 $\boldsymbol{A}$ 作<strong>初等行变换</strong>化为<strong>行简化阶梯形矩阵</strong> $\boldsymbol{B}$；</li>
+<li>记录 $\boldsymbol{B}$ 中所有非零行上的首非零元素所在的列编号 $i$；</li>
+<li>由全体 $\boldsymbol{\alpha} _i$ 组成的向量组即为该向量组的极大无关组．</li>
+</ol>
+<p>使用该方法的好处是，在求解向量组的极大无关组时，可以同时得到此向量组的其余向量由该极大无关组的线性表示：</p>
+<ol>
+<li>设行简化阶梯形矩阵 $\boldsymbol{B}=(\,b _{ij}\,) _{m\times n}$ 的前 $t$ 行为非零行，求得的极大无关组为 $\{\,\boldsymbol{\alpha} _{i _1},\,\boldsymbol{\alpha} _{i _2},\,\cdots,\,\boldsymbol{\alpha} _{i _t}\,\}$；</li>
+<li>对于向量组的其余向量而言，有 $\boldsymbol{\alpha} _p=\displaystyle\sum\limits _{s=1}^{t}b _{sp}\boldsymbol{\alpha} _{i _s}$ 成立，其中 $p\neq i _s$．</li>
+</ol>
+<div class="admonition note"><p class="admonition-title">例题
+</p><p><strong>求解向量组 $\boldsymbol{\alpha} _1=(1,-2,2,-1),\,\boldsymbol{\alpha} _2=(2,-4,8,0),\,\boldsymbol{\alpha} _3=(-2,4,-2,3),\,\boldsymbol{\alpha} _4=(3,-6,0,-6)$ 的极大线性无关组．</strong></p>
+<p>解：将该向量组按列摆放组成矩阵</p>
+<p>$$
+\boldsymbol{A}=\left(\;\begin{matrix}
+1  &amp; 2  &amp; -2 &amp; 3  \\
+-2 &amp; -4 &amp; 4  &amp; -6 \\
+2  &amp; 8  &amp; -2 &amp; 0  \\
+-1 &amp; 0  &amp; 3  &amp; -6
+\end{matrix}\;\right)
+$$</p>
+<p>将其化为行简化阶梯形矩阵为</p>
+<p>$$
+\boldsymbol{B}=\left(\;\begin{matrix}
+1 &amp; 0 &amp; -3           &amp; 6             \\
+0 &amp; 1 &amp; \dfrac{1}{2} &amp; -\dfrac{3}{2} \\
+0 &amp; 0 &amp; 0            &amp; 0             \\
+0 &amp; 0 &amp; 0            &amp; 0
+\end{matrix}\;\right)
+$$</p>
+<p>由于非零行的首非零元素处于第 $1$ 列与第 $2$ 列，故向量组的极大无关组为 $\{\,\boldsymbol{\alpha} _1,\boldsymbol{\alpha} _2\,\}$，且其余向量由该极大无关组线性表示为</p>
+<p>$$
+\begin{cases}
+\boldsymbol{\alpha} _3=-3\boldsymbol{\alpha} _1+\dfrac{1}{2}\boldsymbol{\alpha} _2 \\\\
+\boldsymbol{\alpha} _4=6\boldsymbol{\alpha} _1-\dfrac{3}{2}\boldsymbol{\alpha} _2
+\end{cases}
+$$</p>
+</div>
+<h3 id="向量空间">向量空间</h3>
+<p>设 $V$ 为所有 $n$ 维向量的非空集合，若 $V$ 对向量的加法与数乘运算是<strong>封闭</strong>的，即</p>
+<ol>
+<li>$\forall\,\boldsymbol{\alpha},\,\boldsymbol{\beta}\in V\Rightarrow\boldsymbol{\alpha}+\boldsymbol{\beta}\in V$；</li>
+<li>$\forall\,\boldsymbol{\alpha}\in V,\,k\in\mathbf{R}\Rightarrow k\boldsymbol{\alpha}\in V$．</li>
+</ol>
+<p>则称 $V$ 为实数域上的<strong>向量空间</strong>．</p>
+<p>设有向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n$，若向量空间 $V$ 可表示为</p>
+<p>$$
+V=\{\,k _1\boldsymbol{\alpha} _1+k _2\boldsymbol{\alpha} _2+\cdots+k _n\boldsymbol{\alpha} _n\,|\,k _1,\,k _2,\,\cdots,\,k _n\in\mathbf{R}\,\}
+$$</p>
+<p>则称 $V$ 为由向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n$ <strong>生成的向量空间</strong>，记为 $L(\boldsymbol{\alpha} _1,\boldsymbol{\alpha} _2,\cdots,\boldsymbol{\alpha} _n)$．</p>
+<p>设 $V$ 与 $W$ 为向量空间，则</p>
+<ol>
+<li>若 $W\subseteq V$，则称 $W$ 为 $V$ 的<strong>子空间</strong>；</li>
+<li>若 $W\subset V$，则称 $W$ 为 $V$ 的<strong>真子空间</strong>．</li>
+</ol>
+<p>在向量空间 $V$ 中，若存在 $n$ 个向量 $\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n$，满足：</p>
+<ol>
+<li>$\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n$ 线性无关；</li>
+<li>$V$ 中任意一个向量均可由 $\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n$ 线性表示．</li>
+</ol>
+<p>则称 $\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n$ 为 $V$ 的一组<strong>基</strong>，而称 $n$ 为 $V$ 的<strong>维数</strong>，此时 $V$ 可记为 $V _n$．</p>
+<p>设 $\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n$ 为向量空间 $V _n$ 的一组基，若对于任意一个向量 $\boldsymbol{\alpha}\in V _n$，均存在唯一的一组数 $x _1,\,x _2,\,\cdots,\,x _n$，使得</p>
+<p>$$
+\boldsymbol{\alpha}=x _1\boldsymbol{\varepsilon} _1+x _2\boldsymbol{\varepsilon} _2+\cdots+x _n\boldsymbol{\varepsilon} _n
+$$</p>
+<p>成立，则有序数组 $(x _1,x _2,\cdots,x _n)$ 称为 $\boldsymbol{\alpha}$ 在基 $\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n$ 下的<strong>坐标</strong>，记为 $\boldsymbol{\alpha}=(x _1,x _2,\cdots,x _n)$．</p>
+<p>显然，根据向量空间的定义，<strong>向量在给定基下的坐标是唯一的</strong>，但需要注意的是，<strong>向量在不同基下的坐标是不同的</strong>．</p>
+<h3 id="向量的内积与模数">向量的内积与模数</h3>
+<p>设有向量 $\boldsymbol{\alpha}=(a _1,a _2,\cdots,a _n)$ 与 $\boldsymbol{\beta}=(b _1,b _2,\cdots,b _n)$，则 $\boldsymbol{\alpha}$ 与 $\boldsymbol{\beta}$ 的<strong>内积</strong>定义为</p>
+<p>$$
+(\boldsymbol{\alpha},\boldsymbol{\beta})=a _1b _1+a _2b _2+\cdots+a _nb _n
+$$</p>
+<p>当 $\boldsymbol{\alpha}$ 与 $\boldsymbol{\beta}$ 均为行向量时，从矩阵的角度看，可将二者的内积形式改写为</p>
+<p>$$
+(\boldsymbol{\alpha},\boldsymbol{\beta})=\boldsymbol{\alpha\beta}^\top
+$$</p>
+<p>内积的性质如下所示．</p>
+<ol>
+<li><strong>交换律</strong>：$(\boldsymbol{\alpha},\boldsymbol{\beta})=(\boldsymbol{\beta},\boldsymbol{\alpha})$．</li>
+<li><strong>结合律</strong>：$(k\boldsymbol{\alpha},\boldsymbol{\beta})=(\boldsymbol{\alpha},k\boldsymbol{\beta})=k(\boldsymbol{\alpha},\boldsymbol{\beta})$．</li>
+<li><strong>分配律</strong>：$(\boldsymbol{\alpha}+\boldsymbol{\beta},\boldsymbol{\gamma})=(\boldsymbol{\alpha},\boldsymbol{\gamma})+(\boldsymbol{\beta},\boldsymbol{\gamma})$．</li>
+</ol>
+<p>设有向量 $\boldsymbol{\alpha}=(a _1,a _2,\cdots,a _n)$，则称</p>
+<p>$$
+\Vert\,\boldsymbol{\alpha}\,\Vert=\sqrt{(\boldsymbol{\alpha},\boldsymbol{\alpha})}=\sqrt{a _1^2+a _2^2+\cdots+a _n^2}
+$$</p>
+<p>为 $\boldsymbol{\alpha}$ 的<strong>模数</strong>或<strong>长度</strong>，并称模数为 $1$ 的向量为<strong>单位向量</strong>．</p>
+<p>模数的性质如下所示．</p>
+<ol>
+<li>若 $\boldsymbol{\alpha}\neq\boldsymbol{0}$，则 $\Vert\,\boldsymbol{\alpha}\,\Vert&gt;0$，否则 $\Vert\,\boldsymbol{\alpha}\,\Vert=0$．</li>
+<li>$\Vert\,k\boldsymbol{\alpha}\,\Vert=|\,k\,|\cdot\Vert\,\boldsymbol{\alpha}\,\Vert$，其中 $k\in\mathbf{R}$．</li>
+<li>设 $\boldsymbol{\alpha}$ 与 $\boldsymbol{\beta}$ 为同维向量，则 $\Vert\,\boldsymbol{\alpha}+\boldsymbol{\beta}\,\Vert\leqslant\Vert\,\boldsymbol{\alpha}\,\Vert+\Vert\,\boldsymbol{\beta}\,\Vert$．</li>
+</ol>
+<p><strong>柯西 -- 施瓦茨不等式</strong>：对于两个同维向量 $\boldsymbol{\alpha}$ 与 $\boldsymbol{\beta}$，有</p>
+<p>$$
+(\boldsymbol{\alpha},\boldsymbol{\beta})^2\leqslant(\boldsymbol{\alpha},\boldsymbol{\alpha})\cdot(\boldsymbol{\beta},\boldsymbol{\beta})
+$$</p>
+<p>成立．</p>
+<p>由该不等式，我们可立即推出</p>
+<p>$$
+(\boldsymbol{\alpha},\boldsymbol{\beta})\leqslant\Vert\,\boldsymbol{\alpha}\,\Vert\cdot\Vert\,\boldsymbol{\beta}\,\Vert
+$$</p>
+<p>并在此基础上定义向量的<strong>夹角</strong>为</p>
+<p>$$
+\theta=\arccos\dfrac{(\boldsymbol{\alpha},\boldsymbol{\beta})}{\Vert\,\boldsymbol{\alpha}\,\Vert\cdot\Vert\,\boldsymbol{\beta}\,\Vert}\qquad(\,\Vert\,\boldsymbol{\alpha}\,\Vert,\,\Vert\,\boldsymbol{\beta}\,\Vert\neq 0\,)
+$$</p>
+<h3 id="向量组的正交性">向量组的正交性</h3>
+<p>若两个同维向量 $\boldsymbol{\alpha}$ 与 $\boldsymbol{\beta}$ 的内积为 $0$，即 $(\boldsymbol{\alpha},\boldsymbol{\beta})=0$，则称二者<strong>正交</strong>．</p>
+<p>设 $\boldsymbol{A}:\,\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$ 为向量组，若其中的向量均<strong>两两正交</strong>，则称 $\boldsymbol{A}$ 为<strong>正交向量组</strong>．</p>
+<p><strong>正交向量组是线性无关的，但线性无关的向量组不一定是正交向量组．</strong></p>
+<p><strong>施密特正交化方法</strong>：设 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n$ 线性无关，令</p>
+<p>$$
+\begin{cases}
+\boldsymbol{\beta} _1=\boldsymbol{\alpha} _1 \\\\
+\boldsymbol{\beta} _2=\boldsymbol{\alpha} _2-\dfrac{(\boldsymbol{\alpha} _2,\boldsymbol{\beta} _1)}{(\boldsymbol{\beta} _1,\boldsymbol{\beta} _1)}\boldsymbol{\beta} _1 \\\\
+\cdots \\\\
+\boldsymbol{\beta} _n=\boldsymbol{\alpha} _n-\displaystyle\sum\limits _{i=1}^{n-1}\dfrac{(\boldsymbol{\alpha} _n,\boldsymbol{\beta} _i)}{(\boldsymbol{\beta} _i,\boldsymbol{\beta} _i)}\boldsymbol{\beta} _i
+\end{cases}
+$$</p>
+<p>则 $\{\,\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _n\,\}$ 为正交向量组，且 $\{\,\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _n\,\}\cong\{\,\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n\,\}$．</p>
+<p>在此基础上，令</p>
+<p>$$
+\boldsymbol{\varepsilon} _1=\dfrac{\boldsymbol{\beta} _1}{\Vert\,\boldsymbol{\beta} _1\,\Vert},\,\boldsymbol{\varepsilon} _2=\dfrac{\boldsymbol{\beta} _2}{\Vert\,\boldsymbol{\beta} _2\,\Vert},\,\cdots,\,\boldsymbol{\varepsilon} _n=\dfrac{\boldsymbol{\beta} _n}{\Vert\,\boldsymbol{\beta} _n\,\Vert}
+$$</p>
+<p>则 $\{\,\boldsymbol{\varepsilon} _1,\,\boldsymbol{\varepsilon} _2,\,\cdots,\,\boldsymbol{\varepsilon} _n\,\}$ 为正交单位向量组．</p>
+<p>若向量空间 $V$ 中的一组基为正交单位向量组，则称其为 $V$ 的一组<strong>正交规范基</strong>或<strong>标准正交基</strong>．</p>
+<h3 id="正交矩阵">正交矩阵</h3>
+<p>若 $n$ 阶方阵 $\boldsymbol{A}$ 满足 $\boldsymbol{A}^\top\boldsymbol{A}=\boldsymbol{E}$，则称 $\boldsymbol{A}$ 为 $n$ 阶<strong>正交矩阵</strong>．</p>
+<p>正交矩阵的性质如下所示．</p>
+<ol>
+<li>对于正交矩阵 $\boldsymbol{A}$ 而言，有 $\boldsymbol{A}^\top=\boldsymbol{A}^{-1}$．</li>
+<li>若 $\boldsymbol{A}$ 为正交矩阵，则 $|\,\boldsymbol{A}\,|=\pm 1$．</li>
+<li>若 $\boldsymbol{A}$ 为正交矩阵，则 $\boldsymbol{A}^\top$ 与 $\boldsymbol{A}^{-1}$ 均为正交矩阵．</li>
+<li>若 $\boldsymbol{A}$ 与 $\boldsymbol{B}$ 为同阶正交矩阵，则 $\boldsymbol{AB}$ 与 $\boldsymbol{BA}$ 均为正交矩阵．</li>
+</ol>
+<p>矩阵 $\boldsymbol{A}$ 为正交矩阵的<strong>充要条件</strong>为其行（列）向量组是正交单位向量组．</p>
+<hr>
+<h2 id="线性方程组">线性方程组</h2>
+<h3 id="一般线性方程组的解情况">一般线性方程组的解情况</h3>
+<p>本节中的“一般线性方程组”是<strong>齐次线性方程组</strong>与<strong>非齐次线性方程组</strong>的统称．</p>
+<p>对于由 $m$ 个方程组成的 $n$ 元方程组</p>
+<p>$$
+\begin{cases}
+a _{11}x _1+a _{12}x _2+\cdots+a _{1n}x _n=b _1 \\\\
+a _{21}x _1+a _{22}x _2+\cdots+a _{2n}x _n=b _2 \\\\
+\cdots                                          \\\\
+a _{m1}x _1+a _{m2}x _2+\cdots+a _{mn}x _n=b _m
+\end{cases}
+$$</p>
+<p>其中 $b _1,\,b _2,\,\cdots,\,b _m\in\mathbf{R}$，我们称由各元系数所组成的矩阵</p>
+<p>$$
+\boldsymbol{A}=\left(\;\begin{matrix}
+a _{11} &amp; a _{12} &amp; \cdots &amp; a _{1n}   \\
+a _{21} &amp; a _{22} &amp; \cdots &amp; a _{2n}   \\
+\vdots  &amp; \vdots  &amp;        &amp; \vdots    \\
+a _{m1} &amp; a _{m2} &amp; \cdots &amp; a _{mn}
+\end{matrix}\;\right)
+$$</p>
+<p>为<strong>系数矩阵</strong>，而称矩阵</p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mover><mi mathvariant="bold-italic">A</mi><mo stretchy="false">¯</mo></mover></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mtable columnalign="center center center center center" columnspacing="1em" rowspacing="4pt" columnlines="none none none dashed"><mtr><mtd><msub><mi>a</mi><mrow><mn>11</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mn>12</mn></mrow></msub></mtd><mtd><mo>⋯</mo></mtd><mtd><msub><mi>a</mi><mrow><mn>1</mn><mi>n</mi></mrow></msub></mtd><mtd><msub><mi>b</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mn>21</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mn>22</mn></mrow></msub></mtd><mtd><mo>⋯</mo></mtd><mtd><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mtd><mtd><msub><mi>b</mi><mn>2</mn></msub></mtd></mtr><mtr><mtd><mrow><mo>⋮</mo></mrow></mtd><mtd><mrow><mo>⋮</mo></mrow></mtd><mtd><mo></mo></mtd><mtd><mrow><mo>⋮</mo></mrow></mtd><mtd><mrow><mo>⋮</mo></mrow></mtd></mtr><mtr><mtd><msub><mi>a</mi><mrow><mi>m</mi><mn>1</mn></mrow></msub></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mn>2</mn></mrow></msub></mtd><mtd><mo>⋯</mo></mtd><mtd><msub><mi>a</mi><mrow><mi>m</mi><mi>n</mi></mrow></msub></mtd><mtd><msub><mi>b</mi><mrow><mi>m</mi></mrow></msub></mtd></mtr></mtable><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mo data-mjx-texclass="CLOSE">)</mo></mrow></math></p>
+<p>为<strong>增广矩阵</strong>．</p>
+<p>显然，解方程组的过程，可视为是对其系数矩阵与增广矩阵进行初等行变换的过程．</p>
+<p>方程组的解情况有且仅有三种，即<strong>无解</strong>、<strong>唯一解</strong>与<strong>无穷多组解</strong>．</p>
+<ol>
+<li>当 $r(\boldsymbol{A})\neq r(\bar{\boldsymbol{A}})$ 时，方程组无解．</li>
+<li>当 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})$ 时，
+<ul>
+<li>若 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})=n$，则方程组有唯一解；</li>
+<li>若 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})&lt;n$，则方程组有无穷多组解．</li>
+</ul>
+</li>
+</ol>
+<p>下面将举例说明，以辅助读者理解上述结论．</p>
+<div class="admonition note"><p class="admonition-title">例题
+</p><p>若增广矩阵为</p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mover><mi mathvariant="bold-italic">A</mi><mo stretchy="false">¯</mo></mover></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mtable columnalign="center center center center" columnspacing="1em" rowspacing="4pt" columnlines="none none dashed"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>3</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>4</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr></mtable><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mo data-mjx-texclass="CLOSE">)</mo></mrow></math></p>
+<p>其对应的方程组为</p>
+<p>$$
+\begin{cases}
+x _1=3-x _3 \\\\
+x _2=4 \\\\
+0=1
+\end{cases}
+$$</p>
+<p>则此时 $r(\boldsymbol{A})\neq r(\bar{\boldsymbol{A}})$，方程组无解．</p>
+</div>
+<div class="admonition note"><p class="admonition-title">例题
+</p><p>若增广矩阵为</p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mover><mi mathvariant="bold-italic">A</mi><mo stretchy="false">¯</mo></mover></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mtable columnalign="center center center center" columnspacing="1em" rowspacing="4pt" columnlines="none none dashed"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>2</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>3</mn></mtd></mtr></mtable><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mo data-mjx-texclass="CLOSE">)</mo></mrow></math></p>
+<p>其对应的方程组为</p>
+<p>$$
+\begin{cases}
+x _1=1 \\\\
+x _2=2 \\\\
+x _3=3
+\end{cases}
+$$</p>
+<p>则此时 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})=n=3$，方程组有唯一解．</p>
+</div>
+<div class="admonition note"><p class="admonition-title">例题
+</p><p>若增广矩阵为</p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><mover><mi mathvariant="bold-italic">A</mi><mo stretchy="false">¯</mo></mover></mrow><mo>=</mo><mrow data-mjx-texclass="INNER"><mo data-mjx-texclass="OPEN">(</mo><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mtable columnalign="center center center center" columnspacing="1em" rowspacing="4pt" columnlines="none none dashed"><mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>5</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>9</mn></mtd></mtr><mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr></mtable><mstyle scriptlevel="0"><mspace width="thickmathspace"></mspace></mstyle><mo data-mjx-texclass="CLOSE">)</mo></mrow></math></p>
+<p>其对应的方程组为</p>
+<p>$$
+\begin{cases}
+x _1=5-x _3 \\\\
+x _2=9-x _3
+\end{cases}
+$$</p>
+<p>则此时 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})=2&lt;3$，方程组有无穷多组解．</p>
+</div>
+<h3 id="齐次线性方程组的解情况">齐次线性方程组的解情况</h3>
+<p>设由 $m$ 个方程组成的 $n$ 元<strong>齐次线性方程组</strong></p>
+<p>$$
+\begin{cases}
+a _{11}x _1+a _{12}x _2+\cdots+a _{1n}x _n=0 \\\\
+a _{21}x _1+a _{22}x _2+\cdots+a _{2n}x _n=0 \\\\
+\cdots                                       \\\\
+a _{m1}x _1+a _{m2}x _2+\cdots+a _{mn}x _n=0
+\end{cases}
+$$</p>
+<p>的系数矩阵为 $\boldsymbol{A}$，增广矩阵为 $\bar{\boldsymbol{A}}$，则 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})$ 必定成立，即<strong>齐次线性方程组一定有解</strong>．</p>
+<p>再设上述齐次线性方程组的<strong>解向量</strong>为</p>
+<p>$$
+\boldsymbol{\xi}=\left(\;\begin{matrix}
+c _1 \\
+c _2 \\
+\vdots \\
+c _n
+\end{matrix}\;\right)
+$$</p>
+<p>即存在一组解 $x _1=c _1,\,x _2=c _2,\,\cdots,\,x _n=c _n$ 使得此方程组成立，则 $\boldsymbol{\xi}=\boldsymbol{0}$ 恒为其解，即<strong>齐次线性方程组必有零解</strong>．</p>
+<p>综上，我们可以得出如下结论．</p>
+<ol>
+<li>若 $r(\boldsymbol{A})=n$，则齐次线性方程组有唯一解，且该唯一解为零解，反之亦然．</li>
+<li>若 $r(\boldsymbol{A})&lt;n$，则齐次线性方程组有非零解，反之亦然．</li>
+</ol>
+<p><strong>若齐次线性方程组有非零解，则其具有无穷多组解．</strong></p>
+<p>由于秩的性质，若方程数 $m$ 小于未知量数 $n$，则有</p>
+<p>$$
+r(\boldsymbol{A})\leqslant\min(m,n)=m&lt;n
+$$</p>
+<p>成立，即此时齐次线性方程组有非零解．</p>
+<div id="homogeneous_linear_equations"></div>
+<div class="admonition info"><p class="admonition-title">批注
+</p><p>若将系数矩阵 $\boldsymbol{A}$ 改写为列向量组形式，即</p>
+<p>$$
+\boldsymbol{A}=\left(\,\begin{matrix}\boldsymbol{\alpha} _1 &amp; \boldsymbol{\alpha} _2 &amp; \cdots &amp; \boldsymbol{\alpha} _n\end{matrix}\,\right)
+$$</p>
+<p>其中 $\boldsymbol{\alpha} _i=\left(\;\begin{matrix}a _{1i} \\ a _{2i} \\ \vdots \\ a _{mi}\end{matrix}\;\right)$（$1\leqslant i\leqslant n$），则齐次线性方程组可改写为</p>
+<p>$$
+x _1\boldsymbol{\alpha} _1+x _2\boldsymbol{\alpha} _2+\cdots+x _n\boldsymbol{\alpha} _n=\boldsymbol{0}
+$$</p>
+<p>若 $m&lt;n$，则该齐次线性方程组有非零解，即 $x _1,\,x _2,\,\cdots,\,x _n$ 不全为 $0$，此时 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _n$ 线性相关．</p>
+<p>上述推理过程从齐次线性方程组的角度解释了<a href="#linear_correlation">线性相关的部分定理</a>．</p>
+</div>
+<p>当方程数 $m$ 等于未知量数 $n$ 时，若齐次线性方程组有非零解，即 $r(\boldsymbol{A})&lt;n$，则 $\boldsymbol{A}$ 为降秩矩阵，此时有 $|\,\boldsymbol{A}\,|=0$ 成立．</p>
+<div class="admonition info"><p class="admonition-title">批注
+</p><p>上述二者互为充要条件，即系数行列式 $D=0$ 的齐次线性方程组具有非零解，此为克莱姆法则的推论．</p>
+</div>
+<h3 id="齐次线性方程组的解结构">齐次线性方程组的解结构</h3>
+<p>在本节中，我们仅讨论齐次线性方程组具有非零解的情况．</p>
+<p>齐次线性方程组的解性质如下所示．</p>
+<ol>
+<li>若 $\boldsymbol{\xi} _1$ 与 $\boldsymbol{\xi} _2$ 为方程组 $\boldsymbol{Ax}=\boldsymbol{0}$ 的解，则 $\boldsymbol{\xi} _1+\boldsymbol{\xi} _2$ 也为该方程组的解．</li>
+<li>若 $\boldsymbol{\xi}$ 是方程组 $\boldsymbol{Ax}=\boldsymbol{0}$ 的解，则对于任意常数 $c$ 而言，$c\boldsymbol{\xi}$ 也为该方程组的解．</li>
+</ol>
+<p>对于某个齐次线性方程组，若存在一组解 $\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\,\boldsymbol{\xi} _s$，满足：</p>
+<ol>
+<li>$\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\,\boldsymbol{\xi} _s$ 线性无关；</li>
+<li>该齐次线性方程组的任意一个解均可由 $\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\,\boldsymbol{\xi} _s$ 线性表示．</li>
+</ol>
+<p>则称 $\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\,\boldsymbol{\xi} _s$ 为该齐次线性方程组的一个<strong>基础解系</strong>．</p>
+<div class="admonition info"><p class="admonition-title">批注
+</p><p>实际上，基础解系就是齐次线性方程组解向量组的极大无关组．</p>
+</div>
+<p>求解齐次线性方程组的过程如下所示．</p>
+<ol>
+<li>写出系数矩阵 $\boldsymbol{A}$，将 $\boldsymbol{A}$ 化为行简化阶梯形矩阵 $\boldsymbol{B}$．</li>
+<li>对 $\boldsymbol{B}$ 中的所有非零行，进行如下操作：
+<ul>
+<li>将下标与该行<strong>首非零元素</strong>所在列编号相同的未知量（称为<strong>真未知量</strong>）置于<strong>同解方程组</strong>等号左侧；</li>
+<li>将下标与该行<strong>其余元素</strong>所在列编号相同的未知量（称为<strong>自由未知量</strong>）置于同解方程组等号右侧．</li>
+</ul>
+</li>
+<li>按下标顺序，对自由未知量向量依次赋予自选线性无关组的向量值，计算出真未知量的值．</li>
+<li>将真未知量与自由未知量对应的值组合为解向量，得出基础解系，进而获得<strong>通解</strong>．</li>
+</ol>
+<div class="admonition error"><p class="admonition-title">注意事项
+</p><p>对于某方程组，设由全体未知量所构成的集合为 $X$，真未知量集合为 $X _1$，自由未知量集合为 $X _2$，则应满足</p>
+<p>$$
+\begin{cases}
+X _1\cup X _2=X \\\\
+X _1\cap X _2=\varnothing
+\end{cases}
+$$</p>
+</div>
+<div class="admonition note"><p class="admonition-title">例题
+</p><p><strong>某齐次线性方程组的系数矩阵为</strong></p>
+<p>$$
+\boldsymbol{A}=\left(\;\begin{matrix}1 &amp; 2 &amp; 3 &amp; 1 \\ 0 &amp; 3 &amp; 7 &amp; -1 \\ 0 &amp; 0 &amp; 0 &amp; 0\end{matrix}\;\right)
+$$</p>
+<p><strong>试求解此方程组．</strong></p>
+<p>解：对该方程组的系数矩阵化为行简化阶梯形矩阵可得</p>
+<p>$$
+\boldsymbol{B}=\left(\;\begin{matrix}1 &amp; 0 &amp; -\dfrac{9}{4} &amp; -\dfrac{3}{4} &amp; \dfrac{1}{4} \\ 0 &amp; 1 &amp; \dfrac{3}{4} &amp; -\dfrac{7}{4} &amp; \dfrac{5}{4} \\ 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \end{matrix}\;\right)
+$$</p>
+<p>非零行的首非零元素位于第一列与第二列，故真未知量为 $x _1,\,x _2$，而自由未知量为 $x _3,\,x _4,\,x _5$，并可得同解方程组</p>
+<p>$$
+\begin{cases}
+x _1=\dfrac{9}{4}x _3+\dfrac{3}{4}x _4-\dfrac{1}{4}x _5 \\\\
+x _2=-\dfrac{3}{4}x _3+\dfrac{7}{4}x _4-\dfrac{5}{4}x _5
+\end{cases}
+$$</p>
+<p>令自由未知量向量 $\left(\;\begin{matrix}x _3 \\ x _4 \\ x _5\end{matrix}\;\right)$ 依次取 $\left(\;\begin{matrix}1 \\ 0 \\ 0\end{matrix}\;\right),\,\left(\;\begin{matrix}0 \\ 1 \\ 0\end{matrix}\;\right),\,\left(\;\begin{matrix}0 \\ 0 \\ 1\end{matrix}\;\right)$，得基础解系</p>
+<p>$$
+\boldsymbol{\xi} _1=\left(\;\begin{matrix}\dfrac{9}{4} \\ -\dfrac{3}{4} \\ 1 \\ 0 \\ 0\end{matrix}\;\right),\,\boldsymbol{\xi} _2=\left(\;\begin{matrix}\dfrac{3}{4} \\ \dfrac{7}{4} \\ 0 \\ 1 \\ 0\end{matrix}\;\right),\,\boldsymbol{\xi} _3=\left(\;\begin{matrix}-\dfrac{1}{4} \\ -\dfrac{5}{4} \\ 0 \\ 0 \\ 1\end{matrix}\;\right)
+$$</p>
+<p>故方程组的通解为 $k _1\boldsymbol{\xi} _1+k _2\boldsymbol{\xi} _2+k _3\boldsymbol{\xi} _3$，其中 $k _1,\,k _2,\,k _3$ 为任意常数．</p>
+</div>
+<div class="admonition info"><p class="admonition-title">批注
+</p><p>在上例中，自由未知量向量 $\left(\;\begin{matrix}x _3 \\ x _4 \\ x _5\end{matrix}\;\right)$ 的取值不唯一，为使形式美观，可依次取 $\left(\;\begin{matrix}4 \\ 0 \\ 0\end{matrix}\;\right),\,\left(\;\begin{matrix}0 \\ 4 \\ 0\end{matrix}\;\right),\,\left(\;\begin{matrix}0 \\ 0 \\ 4\end{matrix}\;\right)$，此时基础解系为</p>
+<p>$$
+\boldsymbol{\xi} _1'=\left(\;\begin{matrix}9 \\ -3 \\ 4 \\ 0 \\ 0\end{matrix}\;\right),\,\boldsymbol{\xi} _2'=\left(\;\begin{matrix}3 \\ 7 \\ 0 \\ 4 \\ 0\end{matrix}\;\right),\,\boldsymbol{\xi} _3'=\left(\;\begin{matrix}-1 \\ -5 \\ 0 \\ 0 \\ 4\end{matrix}\;\right)
+$$</p>
+</div>
+<p>通过观察可发现，基础解系的解向量数等于自由未知量数，而真未知量数等于系数矩阵的秩，故有以下结论：</p>
+<p><strong>若齐次线性方程组的系数矩阵 $\boldsymbol{A}$ 的秩为 $r&lt;n$，则其有基础解系，且基础解系所含解向量的个数为 $n-r$．</strong></p>
+<p>由此，我们可以证明以下定理：</p>
+<p><strong>两个矩阵 $\boldsymbol{A} _{m\times n}$ 与 $\boldsymbol{B} _{n\times s}$ 满足关系 $\boldsymbol{AB}=\boldsymbol{O} _{m\times s}$，则 $r(\boldsymbol{A})+r(\boldsymbol{B})\leqslant n$．</strong></p>
+<div class="admonition warning"><p class="admonition-title">证明
+</p><p>将 $\boldsymbol{B}$ 视为列向量分块矩阵 $\left(\,\begin{matrix}\boldsymbol{\beta} _1 &amp; \boldsymbol{\beta} _2 &amp; \cdots &amp; \boldsymbol{\beta} _s\end{matrix}\,\right)$，根据分块矩阵性质，有</p>
+<p>$$
+\boldsymbol{AB}=\boldsymbol{A}\left(\,\begin{matrix}\boldsymbol{\beta} _1 &amp; \boldsymbol{\beta} _2 &amp; \cdots &amp; \boldsymbol{\beta} _s\end{matrix}\,\right)=\left(\,\begin{matrix}\boldsymbol{A\beta} _1 &amp; \boldsymbol{A\beta} _2 &amp; \cdots &amp; \boldsymbol{A\beta} _s\end{matrix}\,\right)=\boldsymbol{O}
+$$</p>
+<p>故 $\boldsymbol{A\beta} _i=\boldsymbol{0}$，其中 $1\leqslant i\leqslant s$．</p>
+<p>从齐次线性方程组的角度，我们可将 $\boldsymbol{\beta} _i$ 视为方程组 $\boldsymbol{Ax}=\boldsymbol{0}$ 的解向量．</p>
+<p>当 $r(\boldsymbol{A})=n$ 时，方程组有唯一零解，此时 $\boldsymbol{\beta} _i=\boldsymbol{0}$，即 $\boldsymbol{B}=\boldsymbol{O}$，故 $r(\boldsymbol{A})+r(\boldsymbol{B})=r(\boldsymbol{A})\leqslant n$．</p>
+<p>当 $r(\boldsymbol{A})&lt;n$ 时，此时 $\boldsymbol{\beta} _i$ 可由基础解系 $\boldsymbol{\xi} _{j}$ 线性表示，其中 $1\leqslant j\leqslant n-r(\boldsymbol{A})$，根据向量组秩的性质，有</p>
+<p>$$
+r(\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _s)\leqslant r(\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\,\boldsymbol{\xi} _{n-r(\boldsymbol{A})})
+$$</p>
+<p>由于矩阵的秩、行秩与列秩三者相等，且基础解系为方程组解向量组的极大无关组，可得</p>
+<p>$$
+r(\boldsymbol{B})=r(\boldsymbol{\beta} _1,\,\boldsymbol{\beta} _2,\,\cdots,\,\boldsymbol{\beta} _s)\leqslant r(\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\,\boldsymbol{\xi} _{n-r(\boldsymbol{A})})=n-r(\boldsymbol{A})
+$$</p>
+<p>即 $r(\boldsymbol{A})+r(\boldsymbol{B})\leqslant n$，证毕．</p>
+</div>
+<h3 id="非齐次线性方程组的解结构">非齐次线性方程组的解结构</h3>
+<p>对于非齐次线性方程组 $\boldsymbol{Ax}=\boldsymbol{b}$，我们称方程组 $\boldsymbol{Ax}=\boldsymbol{0}$ 为其<strong>导出组</strong>．</p>
+<p>非齐次线性方程组的解性质如下所示．</p>
+<ol>
+<li>若 $\boldsymbol{\xi} _1$ 与 $\boldsymbol{\xi} _2$ 为方程组 $\boldsymbol{Ax}=\boldsymbol{b}$ 的解，则 $\boldsymbol{\xi} _1-\boldsymbol{\xi} _2$ 为方程组 $\boldsymbol{Ax}=\boldsymbol{0}$ 的解．</li>
+<li>若 $\boldsymbol{\eta}^<em>$ 为方程组 $\boldsymbol{Ax}=\boldsymbol{b}$ 的解，$\boldsymbol{\xi}$ 为方程组 $\boldsymbol{Ax}=\boldsymbol{0}$ 的解，则 $\boldsymbol{\eta}^</em>+\boldsymbol{\xi}$ 为 $\boldsymbol{Ax}=\boldsymbol{b}$ 的解．</li>
+</ol>
+<p>求解非齐次线性方程组的过程如下所示．</p>
+<ol>
+<li>判断 $r(\boldsymbol{A})$ 与 $r(\bar{\boldsymbol{A}})$ 是否相等，若不相等则方程组无解，否则进入下一步．</li>
+<li>将增广矩阵 $\bar{\boldsymbol{A}}$ 化为行简化阶梯形矩阵 $\boldsymbol{B}$，若 $r(\boldsymbol{A})=r(\bar{\boldsymbol{A}})$ 则直接从 $\boldsymbol{B}$ 得解，否则进入下一步．</li>
+<li>根据 $\boldsymbol{B}$ 写出其同解方程组，令自由未知量向量为零向量，求出真未知量的值，得到非齐次线性方程组的一个<strong>特解</strong> $\boldsymbol{\eta}^*$．</li>
+<li>划去同解方程组中的常数项得到导出组的同解方程组，按求解齐次线性方程组的方法求出基础解系 $\boldsymbol{\xi} _1,\,\boldsymbol{\xi} _2,\,\cdots,\boldsymbol{\xi} _{n-r(\boldsymbol{A})}$．</li>
+<li>非齐次线性方程组的通解为 $\boldsymbol{\eta}^*+c _1\boldsymbol{\xi} _1+c _2\boldsymbol{\xi} _2+\cdots+c _{n-r(\boldsymbol{A})}\boldsymbol{\xi} _{n-r(\boldsymbol{A})}$，其中 $c _1,\,c _2,\,\cdots,\,c _{n-r(\boldsymbol{A})}$ 为任意常数．</li>
+</ol>
+<hr>
+<h2 id="特征值与特征向量">特征值与特征向量</h2>
+<h3 id="基础概念">基础概念</h3>
+<p>设 $\boldsymbol{A}$ 为 $n$ 阶方阵，若对于给定的数 $\lambda$，存在非零列向量 $\boldsymbol{\alpha}$，使得</p>
+<p>$$
+\boldsymbol{A\alpha}=\lambda\boldsymbol{\alpha}
+$$</p>
+<p>成立，则 $\lambda$ 称为 $\boldsymbol{A}$ 的一个<strong>特征值</strong>，而 $\boldsymbol{\alpha}$ 称为对应于 $\lambda$ 的<strong>特征向量</strong>．</p>
+<div class="admonition error"><p class="admonition-title">注意事项
+</p><p>特征值 $\lambda$ 可以为任意实数，但特征向量 $\boldsymbol{\alpha}$ 必须为非零向量．</p>
+</div>
+<p>上式经移项后可化为齐次线性方程组</p>
+<p>$$
+(\boldsymbol{A}-\lambda\boldsymbol{E})\boldsymbol{\alpha}=\boldsymbol{0}
+$$</p>
+<p>故求解特征向量的过程转化为求解上述方程组非零解的过程，而根据克莱姆法则，此时系数矩阵的行列式为零，即</p>
+<p>$$
+|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=0
+$$</p>
+<p>该方程称为 $\boldsymbol{A}$ 的<strong>特征方程</strong>，对其求解可得 $\lambda$ 的值，随后将之代入方程组计算即可得到对应的特征向量．</p>
+<p>若 $\lambda$ 为方阵 $\boldsymbol{A}$ 的特征值，$\boldsymbol{\alpha}$ 为对应的特征向量，则 $c\boldsymbol{\alpha}$ 也为对应于 $\lambda$ 的特征向量（$c\neq 0$）．</p>
+<div class="admonition info"><p class="admonition-title">批注
+</p><p>特征值与特征向量是一对多的关系，即一个 $\lambda$ 可对应多个 $\boldsymbol{\alpha}$，但一个 $\boldsymbol{\alpha}$ 只能对应一个 $\lambda$．</p>
+</div>
+<h3 id="特征值与特征向量的计算">特征值与特征向量的计算</h3>
+<p>对于 $n$ 阶方阵 $\boldsymbol{A}$，计算其特征值与特征向量的过程如下所示．</p>
+<ol>
+<li>计算<strong>特征多项式</strong> $\boldsymbol{A}-\lambda\boldsymbol{E}$，并写出齐次线性方程组 $(\boldsymbol{A}-\lambda\boldsymbol{E})\boldsymbol{\alpha}=\boldsymbol{0}$ 和特征方程 $|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=0$．</li>
+<li>求解特征方程，得到 $\lambda$ 的值．</li>
+<li>若 $\lambda$ 有多个值，则将其分别代入方程组中，按求解齐次线性方程组的方法求解对应的特征向量即可．</li>
+</ol>
+<div class="admonition error"><p class="admonition-title">注意事项
+</p><p>求解齐次线性方程组所得到的特征向量需要限制常数<strong>不能同时为零</strong>，避免特征向量为零向量．</p>
+</div>
+<p>在求解特征方程时，通常对行列式进行变换以得到<strong>包含较多零元素的行</strong>，随后对其提取含 $\lambda$ 的公因子并按行展开计算．</p>
+<div class="admonition note"><p class="admonition-title">例题
+</p><p><strong>求解方阵 $\boldsymbol{A}=\left(\;\begin{matrix}1 &amp; -2 &amp; 2 \\ -2 &amp; -2 &amp; 4 \\ 2 &amp; 4 &amp; -2\end{matrix}\;\right)$ 的特征值与特征向量．</strong></p>
+<p>解：特征多项式的行列式为</p>
+<p>$$
+\begin{aligned}
+\newcommand{\Longeq}{=\!=\!=\!=\!=\!=\!=\!=}
+|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=&amp;\;\left|\;\begin{matrix}1-\lambda &amp; -2 &amp; 2 \\ -2 &amp; -2-\lambda &amp; 4 \\ 2 &amp; 4 &amp; -2-\lambda\end{matrix}\;\right| \\\\
+\overset{r _3+r _2}{\Longeq}&amp;\;\left|\;\begin{matrix}1-\lambda &amp; -2 &amp; 2 \\ -2 &amp; -2-\lambda &amp; 4 \\ 0 &amp; 2-\lambda &amp; 2-\lambda\end{matrix}\;\right| \\\\
+\overset{c _2+(-1)\cdot c _3}{\Longeq}&amp;\;\left|\;\begin{matrix}1-\lambda &amp; -4 &amp; 2 \\ -2 &amp; -6-\lambda &amp; 4 \\ 0 &amp; 0 &amp; 2-\lambda\end{matrix}\;\right| \\\\
+=&amp;\;(2-\lambda)\cdot\left|\;\begin{matrix}1-\lambda &amp; -4 &amp; 2 \\ -2 &amp; -6-\lambda &amp; 4 \\ 0 &amp; 0 &amp; 1\end{matrix}\;\right| \\\\
+\overset{expand\;by\;r _3}{\Longeq}&amp;\;(2-\lambda)\cdot(-1)^{3+3}\cdot\left|\;\begin{matrix}1-\lambda &amp; -4 \\ -2 &amp; -6-\lambda\end{matrix}\;\right| \\\\
+=&amp;\;(2-\lambda)(\lambda+7)(\lambda-2)
+\end{aligned}
+$$</p>
+<p>故特征方程 $|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=\boldsymbol{0}$ 的解为 $\lambda _1=\lambda _2=2,\,\lambda _3=-7$．</p>
+<p>当 $\lambda=2$ 时，此时方程组 $(\boldsymbol{A}-\lambda\boldsymbol{E})\boldsymbol{\alpha}=\boldsymbol{0}$ 的系数矩阵 $\boldsymbol{A}-\lambda\boldsymbol{E}=\left(\;\begin{matrix}-1 &amp; -2 &amp; 2 \\ -2 &amp; -4 &amp; 4 \\ 2 &amp; 4 &amp; -4\end{matrix}\;\right)$，化为行简化阶梯型矩阵为</p>
+<p>$$
+\boldsymbol{B} _1=\left(\;\begin{matrix}1 &amp; 2 &amp; -2 \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0\end{matrix}\;\right)
+$$</p>
+<p>同解方程（组）为 $x _1=-2x _2+2x _3$，令自由未知量向量 $\left(\;\begin{matrix}x _2 \\ x _3\end{matrix}\;\right)$ 依次取 $\left(\;\begin{matrix}1 \\ 0\end{matrix}\;\right),\,\left(\;\begin{matrix}0 \\ 1\end{matrix}\;\right)$，得基础解系</p>
+<p>$$
+\boldsymbol{\xi} _1=\left(\;\begin{matrix}-2 \\ 1 \\ 0\end{matrix}\;\right),\,\boldsymbol{\xi} _2=\left(\;\begin{matrix}2 \\ 0 \\ 1\end{matrix}\;\right)
+$$</p>
+<p>故对应于 $\lambda=2$ 的所有特征向量为 $k _1\boldsymbol{\xi} _1+k _2\boldsymbol{\xi} _2$，其中 $k _1,\,k _2$ <strong>不同时为零</strong>．</p>
+<p>当 $\lambda=-7$ 时，此时方程组 $(\boldsymbol{A}-\lambda\boldsymbol{E})\boldsymbol{\alpha}=\boldsymbol{0}$ 的系数矩阵 $\boldsymbol{A}-\lambda\boldsymbol{E}=\left(\;\begin{matrix}8 &amp; -2 &amp; 2 \\ -2 &amp; 5 &amp; 4 \\ 2 &amp; 4 &amp; 5\end{matrix}\;\right)$，化为行简化阶梯型矩阵为</p>
+<p>$$
+\boldsymbol{B} _2=\left(\;\begin{matrix}1 &amp; 0 &amp; \dfrac{1}{2} \\ 0 &amp; 1 &amp; 1 \\ 0 &amp; 0 &amp; 0\end{matrix}\;\right)
+$$</p>
+<p>同解方程组为 $\begin{cases}x _1=-\dfrac{1}{2}x _3 \\\\ x _2=-x _3\end{cases}$，令自由未知量 $x _3=-2$，得基础解系</p>
+<p>$$
+\boldsymbol{\xi} _3=\left(\;\begin{matrix}1 \\ 2 \\ -2\end{matrix}\;\right)
+$$</p>
+<p>故对应于 $\lambda=-7$ 的所有特征向量为 $k _3\boldsymbol{\xi} _3$，其中 $k _3\neq 0$．</p>
+</div>
+<p>对于上三角形矩阵 $\boldsymbol{A}=\left(\;\begin{matrix}a _{11} &amp; a _{12} &amp; \cdots &amp; a _{1n} \\ &amp; a _{22} &amp; \cdots &amp; a _{2n} \\ &amp; &amp; \ddots &amp; \vdots \\ &amp; &amp; &amp; a _{nn}\end{matrix}\;\right)$，其特征多项式的行列式为</p>
+<p>$$
+|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=\left|\;\begin{matrix}a _{11}-\lambda &amp; a _{12} &amp; \cdots &amp; a _{1n} \\ &amp; a _{22}-\lambda &amp; \cdots &amp; a _{2n} \\ &amp; &amp; \ddots &amp; \vdots \\ &amp; &amp; &amp; a _{nn}-\lambda\end{matrix}\;\right|=\displaystyle\prod\limits _{i=1}^n(a _{ii}-\lambda)
+$$</p>
+<p>显然，$\boldsymbol{A}$ 的所有特征值为 $a _{ii}$，其中 $1\leqslant i\leqslant n$．</p>
+<h3 id="特征值与特征向量的性质">特征值与特征向量的性质</h3>
+<p>本节涉及的知识点较多，部分性质将会给出证明过程．</p>
+<ol>
+<li>
+<p>方阵 $\boldsymbol{A}$ 与其转置 $\boldsymbol{A}^\top$ 有相同的特征值．</p>
+ <div class="admonition warning">
+ <div class="admonition-title">证明</div>
+ <div style="margin-top: .8rem">由于 $|\;\boldsymbol{A}^\top-\lambda\boldsymbol{E}\;|=|\;\boldsymbol{A}^\top-\lambda\boldsymbol{E}^\top\;|=|\;(\boldsymbol{A}-\lambda\boldsymbol{E})^\top\;|=|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|$，故 $\boldsymbol{A}$ 与 $\boldsymbol{A}^\top$ 在特征方程上同解，证毕．</div>
+ </div>
+ <div class="admonition error">
+ <div class="admonition-title">注意事项</div>
+ <div style="margin-top: .8rem">方阵 $\boldsymbol{A}$ 与其转置 $\boldsymbol{A}^\top$ 对应的特征向量<b>不一定相同</b>．</div>
+ </div>
+</li>
+<li>
+<p>设方阵 $\boldsymbol{A}=(\,a _{ij}\,) _{n\times n}$ 有 $n$ 个特征值 $\lambda _1,\,\lambda _2,\,\cdots,\,\lambda _n$，则有：</p>
+<ul>
+<li>$\displaystyle\sum\limits _{i=1}^n\lambda _i=\sum\limits _{i=1}^na _{ii}$；</li>
+<li>$\displaystyle\prod\limits _{i=1}^n\lambda _i=|\;\boldsymbol{A}\;|$．</li>
+</ul>
+ <div class="admonition info">
+ <div class="admonition-title">提示</div>
+ <div style="margin-top: .8rem">$n$ 阶行列式的一种计算方法为</div>
+ $$\left|\;\begin{matrix}a _{11} & a _{12} & \cdots & a _{1n} \\ a _{21} & a _{22} & \cdots & a _{2n} \\ \vdots  & \vdots  & \ddots & \vdots  \\ a _{n1} & a _{n2} & \cdots & a _{nn}\end{matrix}\;\right|=\sum\limits _{j _1 j _2\cdots j _n}(-1)^{N(j _1 j _2\cdots j _n)}a _{(1j _1)}a _{(2j _2)}\cdots a _{(nj _n)}$$
+ <div style="margin-top: .8rem">其中 $j _1 j _2\cdots j _n$ 是一个 $n$ 级排列，$N(j _1 j _2\cdots j _n)$ 是其逆序数．</div>
+ </div>
+ <div class="admonition warning">
+ <div class="admonition-title">证明</div>
+ <div style="margin-top: .8rem">对特征多项式的行列式，有</div>
+ $$\begin{aligned}
+ |\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|&=\left|\;\begin{matrix}a _{11}-\lambda & a _{12} & \cdots & a _{1n} \\ a _{21} & a _{22}-\lambda & \cdots & a _{2n} \\ \vdots  & \vdots  & \ddots & \vdots  \\ a _{n1} & a _{n2} & \cdots & a _{nn}-\lambda\end{matrix}\\;\right| \\\\
+ &=(-1)^{N(12\cdots n)}\prod\limits _{i=1}^n(a _{ii}-\lambda)+R _D \\\\
+ &=\prod\limits _{i=1}^n(a _{ii}-\lambda)+R _D \\\\
+ &=(-1)^n\prod\limits _{i=1}^n(\lambda-a _{ii})+R _D \\\\
+ &=(-1)^n\cdot(\lambda-a _{11})(\lambda-a _{22})\cdots(\lambda-a _{nn})+R _D \\\\
+ &=(-1)^n\cdot[\,\lambda^n-(a _{11}+a _{22}+\cdots+a _{nn})\lambda ^{n-1}+\cdots+(-1)^na _{11}a _{22}\cdots a _{nn}\,]+R _D\end{aligned}$$
+ <div style="margin-top: .8rem">在上述过程中，我们按顺序依次取出主对角线上的元素以计算行列式，其中 $R _D$ 表示其余取法的元素乘积和．</div>
+ <div style="margin-top: .8rem">就本质而言，$|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|$ 是一个关于 $\lambda$ 的多项式 $\displaystyle\sum\limits _{i=1}^nk _i\lambda^i$，故令 $\lambda=0$ 即可求得该多项式的常数项，此值为 $|\;\boldsymbol{A}\;|$．</div>
+ <div style="margin-top: .8rem">注意到，对于其余取法，若在行列式中取出非主对角线元素 $a _{ij}$，则主对角线元素 $a _{ii}-\lambda$ 与 $a _{jj}-\lambda$ 不能再取．</div>
+ <div style="margin-top: .8rem">因此，非主对角线取法对多项式 $|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=\displaystyle\sum\limits _{i=1}^nk _i\lambda^i$ 贡献的最高次数为 $n-2$，即必有</div>
+ $$R _D=\sum\limits _{i=1}^{n-2}p _i\lambda^i$$
+ <div style="margin-top: .8rem">成立，故 $|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|$ 中 $\lambda^{n-1}$ 的系数为 $(-1)^{n+1}\displaystyle\sum\limits _{i=1}^na _{ii}$．</div>
+ <div style="margin-top: .8rem">基于上述理由，我们继续改写原式为</div>
+ $$\begin{aligned}
+ \text{原式}=(-1)^n\lambda^n+(-1)^{n+1}\lambda^{n-1}\sum\limits _{i=1}^na _{ii}+R _D'(\lambda)+|\;\boldsymbol{A}\;|
+ \end{aligned}$$
+ <div style="margin-top: .8rem">其中 $R _D'(\lambda)$ 为原式其余项表示为关于 $\lambda$ 的函数．</div>
+ <div style="margin-top: .8rem">由于 $\boldsymbol{A}$ 的所有特征值为 $\lambda _1,\,\lambda _2,\,\cdots,\,\lambda _n$，故 $|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|$ 可分解因式，即</div>
+ $$\begin{aligned}
+ |\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|=(-1)^n|\;\lambda\boldsymbol{E}-\boldsymbol{A}\;|&=(-1)^n\prod\limits _{i=1}^n(\lambda-\lambda _i) \\\\
+ &=(-1)^n\cdot(\lambda-\lambda _1)(\lambda-\lambda _2)\cdots(\lambda-\lambda _n) \\\\
+ &=(-1)^n\cdot[\,\lambda ^n-(\lambda _1+\lambda _2+\cdots+\lambda _n)\lambda^{n-1}+\cdots+(-1)^n\lambda _1\lambda _2\cdots\lambda _n\,] \\\\
+ &=(-1)^n\lambda^n+(-1)^{n+1}\lambda^{n-1}\sum\limits _{i=1}^n\lambda _i+\cdots+\prod\limits _{i=1}^n\lambda _i
+ \end{aligned}$$
+ <div style="margin-top: .8rem">比较 $|\;\boldsymbol{A}-\lambda\boldsymbol{E}\;|$ 的两种表达式，可得 $\displaystyle\sum\limits _{i=1}^n\lambda _i=\sum\limits _{i=1}^na _{ii}$ 且 $\displaystyle\prod\limits _{i=1}^n\lambda _i=|\;\boldsymbol{A}\;|$，证毕．</div>
+ </div>
+ <div class="admonition info">
+ <div class="admonition-title">批注</div>
+ <div style="margin-top: .8rem">在上述证明过程中，$\displaystyle\sum\limits _{i=1}^na _{ii}$ 是一个重要的参数，故将之称为 $\boldsymbol{A}$ 的<b>迹</b>，记为 $\text{tr}(\boldsymbol{A})$．</div>
+ </div>
+</li>
+<li>
+<p>设方阵 $\boldsymbol{A}$ 有 $m$ 个互异的特征值 $\lambda _1,\,\lambda _2,\,\lambda _m$，则其各自对应的特征向量 $\boldsymbol{\alpha} _1,\,\boldsymbol{\alpha} _2,\,\cdots,\,\boldsymbol{\alpha} _m$ 线性无关．</p>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">设方阵 $\boldsymbol{A}$ 有 $m$ 个互异的特征值 $\lambda _1,\,\lambda _2,\,\cdots,\,\lambda _m$，且每个特征值 $\lambda _i$ 对应 $r _i$ 个<b>线性无关</b>的特征向量</div>
+ $$\boldsymbol{\alpha} _{i1},\,\boldsymbol{\alpha} _{i2},\,\cdots,\,\boldsymbol{\alpha} _{ir _i}\qquad (\,1\leqslant i\leqslant m\,)$$
+ <div style="margin-top: .8rem">则由该 $\displaystyle\sum\limits _{i=1}^mr _i$ 个特征向量组成的向量组</div>
+ $$\boldsymbol{\alpha} _{11},\,\cdots,\,\boldsymbol{\alpha} _{1r _1},\,\boldsymbol{\alpha} _{21},\,\cdots,\,\boldsymbol{\alpha} _{2r _2},\,\cdots,\,\boldsymbol{\alpha} _{m1},\,\cdots,\,\boldsymbol{\alpha} _{mr _m}$$
+ <div style="margin-top: .8rem">线性无关．</div>
+ </div>
+</li>
+<li>
+<p>$k$ 重特征根对应的线性无关的特征向量的个数小于等于 $k$．</p>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">$n$ 阶方阵 $\boldsymbol{A}$ 所有线性无关的特征向量的个数小于等于 $n$．</div>
+ </div>
+</li>
+<li>
+<p>若 $\lambda$ 为方阵 $\boldsymbol{A}$ 的一个特征值，设有多项式函数 $\displaystyle\varphi(x)=\sum\limits _{i=0}^mk _ix^i$，则 $\varphi(\lambda)$ 为方阵 $\varphi(\boldsymbol{A})$ 的一个特征值．</p>
+ <div class="admonition primary">
+ <div class="admonition-title">推论</div>
+ <div style="margin-top: .8rem">设 $\boldsymbol{\alpha}$ 为方阵 $\boldsymbol{A}$ 对应于 $\lambda$ 的特征向量，则其同时也为方阵 $\varphi(\boldsymbol{A})$ 对应于 $\varphi(\lambda)$ 的特征向量．</div>
+ </div>
+</li>
+<li>
+<p>若 $\lambda$ 为方阵 $\boldsymbol{A}$ 的一个特征值，则</p>
+<ul>
+<li>$\dfrac{1}{\lambda}$ 为方阵 $\boldsymbol{A}^{-1}$ 的一个特征值；</li>
+<li>$\dfrac{1}{\lambda}\cdot|\;\boldsymbol{A}\;|$ 为方阵 $\boldsymbol{A}^*$ 的一个特征值．</li>
+</ul>
+</li>
+</ol>
+<h3 id="相似矩阵">相似矩阵</h3>
+<p>对于两个 $n$ 阶<strong>方阵</strong> $\boldsymbol{A}$ 与 $\boldsymbol{B}$，若存在 $n$ 阶可逆矩阵 $\boldsymbol{P}$，使得</p>
+<p>$$
+\boldsymbol{P}^{-1}\boldsymbol{AP}=\boldsymbol{B}
+$$</p>
+<p>成立，则称 $\boldsymbol{A}$ 与 $\boldsymbol{B}$ <strong>相似</strong>，记为 $\boldsymbol{A}\sim\boldsymbol{B}$．</p>
+<p>相似矩阵的性质如下所示．</p>
+<ol>
+<li><strong>反身性</strong>：$\boldsymbol{A}\sim\boldsymbol{A}$．</li>
+<li><strong>对称性</strong>：$\boldsymbol{A}\sim\boldsymbol{B}\Rightarrow\boldsymbol{B}\sim\boldsymbol{A}$．</li>
+<li><strong>传递性</strong>：$\boldsymbol{A}\sim\boldsymbol{B},\,\boldsymbol{B}\sim\boldsymbol{C}\Rightarrow\boldsymbol{A}\sim\boldsymbol{C}$．</li>
+</ol>
+<p>若方阵 $\boldsymbol{A}$ 与 $\boldsymbol{B}$ 之间存在相似关系 $\boldsymbol{A}\sim\boldsymbol{B}$，则有以下结论成立．</p>
+<ol>
+<li>
+<p>二者的迹相等，即 $\text{tr}(\boldsymbol{A})=\text{tr}(\boldsymbol{B})$．</p>
+</li>
+<li>
+<p>二者的行列式相等，即 $|\;\boldsymbol{A}\;|=|\;\boldsymbol{B}\;|$．</p>
+</li>
+<li>
+<p>二者<strong>可逆性一致</strong>，即 $\boldsymbol{A}$ 可逆的充要条件为 $\boldsymbol{B}$ 可逆．</p>
+</li>
+<li>
+<p>若二者均可逆，则 $\boldsymbol{A}^{-1}\sim\boldsymbol{B}^{-1}$．</p>
+</li>
+<li>
+<p>二者的幂相似，即 $\boldsymbol{A}^m\sim\boldsymbol{B}^m$，其中 $m\in\mathbf{Z} _+$．</p>
+</li>
+<li>
+<p>二者具有相同的特征值，即 $\lambda _{\boldsymbol{A}}=\lambda _{\boldsymbol{B}}$．</p>
+ <div class="admonition error">
+ <div class="admonition-title">注意事项</div>
+ <div style="margin-top: .8rem">该结论的逆命题不成立，即特征值相同的两个方阵不一定相似．</div>
+ </div>
+</li>
+<li>
+<p>二者的秩相等，即 $r(\boldsymbol{A})=r(\boldsymbol{B})$．</p>
+</li>
+</ol>
+<!-- ### 矩阵可对角化的条件
+矩阵对角化对于计算机领域具有重要意义，如在主成分分析（PCA）中，协方差矩阵的对角化是其关键步骤之一．
+
+给定任意 $n$ 阶方阵 $\boldsymbol{A}$，寻求相似变换方阵 $\boldsymbol{P}$，使得 $\boldsymbol{P}^{-1}\boldsymbol{AP}=\boldsymbol{\varLambda}$，即 $\boldsymbol{A}\sim\boldsymbol{\varLambda}$ 成立的过程称为 $\boldsymbol{A}$ 的**相似对角化**．
+
+设有 $n$ 阶方阵 $\boldsymbol{A}$ 与对角矩阵 $\boldsymbol{\varLambda}$，则 $\boldsymbol{A}\sim\boldsymbol{\varLambda}$ 的充要条件为 **$\boldsymbol{A}$ 有 $n$ 个线性无关的特征向量**．
+
+<div class="admonition primary">
+<div class="admonition-title">推论</div>
+<div style="margin-top: .8rem">若方阵 $\boldsymbol{A}$ 有 $n$ 个互异的特征值 $\lambda _1,\,\lambda _2,\,\cdots,\,\lambda _n$，则 $\boldsymbol{A}\sim\boldsymbol{\varLambda}=\left(\;\begin{matrix}\lambda _1 & & & \\ & \lambda _2 & & \\ & & \ddots & \\ & & & \lambda _n\end{matrix}\;\right)$．</div>
+</div>
+
+试判断方阵 $\boldsymbol{A}=\left(\\;\begin{matrix}3 & 2 & -1 \\\\ -2 & -2 & 2 \\\\ 3 & 6 & -1\end{matrix}\\;\right)$ 是否与某个对角矩阵相似，若相似，请求出该对角矩阵 $\boldsymbol{\varLambda}$ 与相似变换方阵 $\boldsymbol{P}$．
+
+解：首先求解 $\boldsymbol{A}$ 的所有特征值，由题意有
+
+$$
+\begin{aligned}
+    \newcommand{\longeq}{=\\!=\\!=\\!=}
+    |\\;\boldsymbol{A}-\lambda\boldsymbol{E}\\;|=&\\;\left|\\;\begin{matrix}
+        3-\lambda & 2 & -1 \\\\
+        -2 & -2-\lambda & 2 \\\\
+        3 & 6 & -1-\lambda
+    \end{matrix}\\;\right| \\\\\\\\
+    \overset{c _1+c _3}{\longeq}&\\;\left|\\;\begin{matrix}
+        2-\lambda & 2 & -1 \\\\
+        0 & -2-\lambda & 2 \\\\
+        2-\lambda & 6 & -1-\lambda
+    \end{matrix}\\;\right| \\\\\\\\
+    \overset{r _3-r _1}{\longeq}&\\;\left|\\;\begin{matrix}
+        2-\lambda & 2 & -1 \\\\
+        0 & -2-\lambda & 2 \\\\
+        0 & 4 & -\lambda
+    \end{matrix}\\;\right| \\\\\\\\
+    =&\\;(2-\lambda)\cdot\left|\\;\begin{matrix}
+        -2-\lambda & 2 \\\\
+        4 & -\lambda
+    \end{matrix}\\;\right|\\\\\\\\
+    =&\\;(2-\lambda)(\lambda+4)(\lambda-2)
+\end{aligned}
+$$
+
+故特征方程 $\left|\\;\boldsymbol{A}-\lambda\boldsymbol{E}\\;\right|=0$ 的解为 $\lambda _1=-4,\\,\lambda _2=\lambda _3=2$．
+
+当 $\lambda=-4$ 时，其对应的特征向量为 $\boldsymbol{\alpha} _1=\left(\\;\begin{matrix}1 \\\\ -2 \\\\ 3\end{matrix}\\;\right)$，显然线性无关．
+
+当 $\lambda=2$ 时，其对应的特征向量为 $\boldsymbol{\alpha} _2=\left(\\;\begin{matrix}-2 \\\\ 1 \\\\ 0\end{matrix}\\;\right),\\,\boldsymbol{\alpha} _3=\left(\\;\begin{matrix}1 \\\\ 0 \\\\ 1\end{matrix}\\;\right)$，易知二者同样线性无关．-->
+</div><div class="article-licensing box"><div class="licensing-title"><p>线性代数概论</p><p><a href="http://blog.kksk.tech/2024/02/29/线性代数概论/">http://blog.kksk.tech/2024/02/29/线性代数概论/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>Author</h6><p>KoSaking</p></div></div><div class="level-item is-narrow"><div><h6>Posted on</h6><p>2024-02-29</p></div></div><div class="level-item is-narrow"><div><h6>Updated on</h6><p>2025-12-24</p></div></div><div class="level-item is-narrow"><div><h6>Licensed under</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i> </a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i> </a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i> </a></p></div></div></div></div></div><hr style="height:1px;margin:1rem 0"><div class="level is-mobile is-flex"><div class="article-tags is-size-7 is-uppercase"><i class="fas fa-tags has-text-grey"></i> <a class="link-muted" rel="tag" href="/tags/math/">math, </a><a class="link-muted" rel="tag" href="/tags/linear-algebra/">linear algebra, </a><a class="link-muted" rel="tag" href="/tags/matrix/">matrix, </a><a class="link-muted" rel="tag" href="/tags/vector/">vector </a></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/2024/03/01/%E6%A6%82%E7%8E%87%E8%AE%BA%E7%AC%94%E8%AE%B0/"><i class="level-item fas fa-chevron-left"></i><span class="level-item">概率论笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2024/02/10/%E7%9F%A9%E9%98%B5%E5%9F%BA%E7%A1%80/"><span class="level-item">矩阵基础</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level" style="margin-bottom:1rem"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="KoSaking"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">KoSaking</p><p class="is-size-6 is-block">kosaking0715@outlook.com</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Hong Kong SAR, China</span></p></div></div></nav><nav class="level menu-list is-mobile" style="margin-bottom:1rem"><a class="level-item has-text-centered is-marginless" href="/archives/"><div><p class="heading">Posts</p><div><p class="title">8</p></div></div></a><a class="level-item has-text-centered is-marginless" href="/categories/"><div><p class="heading">Categories</p><div><p class="title">3</p></div></div></a><a class="level-item has-text-centered is-marginless" href="/tags/"><div><p class="heading">Tags</p><div><p class="title">11</p></div></div></a></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/kosaking0715" target="_blank" rel="noopener"><i class="fab fa-github"></i>  Follow</a></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">Catalogue</h3><ul class="menu-list"><li><a class="level is-mobile" href="#向量与向量组"><span class="level-left"><span class="level-item">1</span><span class="level-item">向量与向量组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基本定义与运算"><span class="level-left"><span class="level-item">1.1</span><span class="level-item">基本定义与运算</span></span></a></li><li><a class="level is-mobile" href="#向量间的线性表示"><span class="level-left"><span class="level-item">1.2</span><span class="level-item">向量间的线性表示</span></span></a></li><li><a class="level is-mobile" href="#向量组的线性相关性"><span class="level-left"><span class="level-item">1.3</span><span class="level-item">向量组的线性相关性</span></span></a></li><li><a class="level is-mobile" href="#向量组的等价关系"><span class="level-left"><span class="level-item">1.4</span><span class="level-item">向量组的等价关系</span></span></a></li><li><a class="level is-mobile" href="#向量组的秩"><span class="level-left"><span class="level-item">1.5</span><span class="level-item">向量组的秩</span></span></a></li><li><a class="level is-mobile" href="#矩阵的行秩与列秩"><span class="level-left"><span class="level-item">1.6</span><span class="level-item">矩阵的行秩与列秩</span></span></a></li><li><a class="level is-mobile" href="#极大无关组的求解方法"><span class="level-left"><span class="level-item">1.7</span><span class="level-item">极大无关组的求解方法</span></span></a></li><li><a class="level is-mobile" href="#向量空间"><span class="level-left"><span class="level-item">1.8</span><span class="level-item">向量空间</span></span></a></li><li><a class="level is-mobile" href="#向量的内积与模数"><span class="level-left"><span class="level-item">1.9</span><span class="level-item">向量的内积与模数</span></span></a></li><li><a class="level is-mobile" href="#向量组的正交性"><span class="level-left"><span class="level-item">1.10</span><span class="level-item">向量组的正交性</span></span></a></li><li><a class="level is-mobile" href="#正交矩阵"><span class="level-left"><span class="level-item">1.11</span><span class="level-item">正交矩阵</span></span></a></li></ul></li><li><a class="level is-mobile" href="#线性方程组"><span class="level-left"><span class="level-item">2</span><span class="level-item">线性方程组</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#一般线性方程组的解情况"><span class="level-left"><span class="level-item">2.1</span><span class="level-item">一般线性方程组的解情况</span></span></a></li><li><a class="level is-mobile" href="#齐次线性方程组的解情况"><span class="level-left"><span class="level-item">2.2</span><span class="level-item">齐次线性方程组的解情况</span></span></a></li><li><a class="level is-mobile" href="#齐次线性方程组的解结构"><span class="level-left"><span class="level-item">2.3</span><span class="level-item">齐次线性方程组的解结构</span></span></a></li><li><a class="level is-mobile" href="#非齐次线性方程组的解结构"><span class="level-left"><span class="level-item">2.4</span><span class="level-item">非齐次线性方程组的解结构</span></span></a></li></ul></li><li><a class="level is-mobile" href="#特征值与特征向量"><span class="level-left"><span class="level-item">3</span><span class="level-item">特征值与特征向量</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#基础概念"><span class="level-left"><span class="level-item">3.1</span><span class="level-item">基础概念</span></span></a></li><li><a class="level is-mobile" href="#特征值与特征向量的计算"><span class="level-left"><span class="level-item">3.2</span><span class="level-item">特征值与特征向量的计算</span></span></a></li><li><a class="level is-mobile" href="#特征值与特征向量的性质"><span class="level-left"><span class="level-item">3.3</span><span class="level-item">特征值与特征向量的性质</span></span></a></li><li><a class="level is-mobile" href="#相似矩阵"><span class="level-left"><span class="level-item">3.4</span><span class="level-item">相似矩阵</span></span></a></li></ul></li></ul></div></div><style>#toc .menu-list > li > a.is-active + .menu-list { display: block; }#toc .menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img class="logo-img" src="/img/logo.svg" alt="KoSaking&#039;s blog" height="28"><img class="logo-img-dark" src="/img/logo-dark.svg" alt="KoSaking&#039;s blog" height="28"></a><p class="is-size-7"><span>&copy; 2025 KoSaking</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p><p class="is-size-7">© 2019</p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/mhchem.min.js" defer></script><script>window.addEventListener("load", function() {
+            document.querySelectorAll('[role="article"] > .content').forEach(function(element) {
+                renderMathInElement(element);
+            });
+        });</script><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script src="/js/night.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script><script type="text/javascript" src="/js/universe.js"></script></body></html>
